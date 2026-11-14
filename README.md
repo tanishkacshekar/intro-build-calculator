@@ -9,14 +9,23 @@ The agent answers natural-language math word problems by calling tools:
 - `tree_distance(crown_angle, crown_height)` — horizontal distance to a tree
   from the angle of elevation and crown height
 
-## Notebook
+## Files
 
-`intelligent_calculator.ipynb` is committed **after a full run** — every code
-cell has its saved output and execution count (1–16), including:
+- `intelligent_calculator.ipynb` — the notebook, committed after a full run
+  (code cells carry their saved outputs and execution counts)
+- `mcp_server.py` — MCP server exposing the `solve_math_problem` tool over
+  stdio (also written by the notebook's `%%writefile` cell)
 
-- tool-call tests (`add`, `tree_distance`) with results
-- three solved problems: apples, tree height, and the missing-angle case
-  (which correctly asks for the elevation angle instead of guessing)
-- LangSmith tracing setup for project `intro-build-calculator`
-- a LangSmith run query listing the traced runs:
-  `intro_apples`, `intro_tree`, `intro_missing_angle` (all `success`)
+## Verification (all visible in the notebook's saved outputs)
+
+- **Tool-call tests:** `add` (5+10 → 15, 7+8 → 15), `tree_distance`
+  (~17.32 metres), and the missing-angle case where the agent asks for the
+  elevation angle instead of guessing.
+- **LangSmith:** tracing for project `intro-build-calculator`; the run query
+  lists `intro_apples`, `intro_tree`, `intro_missing_angle` — all `success`.
+- **MCP:** `mcp_server.py` was tested manually in MCP Inspector and verified
+  programmatically in the notebook — an MCP client launches the server over
+  stdio, lists its tools, calls `solve_math_problem` on both apple problems,
+  and prints `Check: PASS` twice.
+- **ChatGPT MCP tunnel:** unavailable (HTTP 401) — documented honestly in the
+  notebook.
