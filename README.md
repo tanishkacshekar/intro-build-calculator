@@ -3,6 +3,9 @@
 An intelligent calculator built with LangChain and Groq (Llama) as part of the
 intro "build a calculator" course exercise.
 
+**Public repository.** The default branch `main` carries the latest executed
+notebook, `intelligent_calculator.ipynb`, with all saved outputs.
+
 The agent answers natural-language math word problems by calling tools:
 
 - `add(a, b)` — integer addition
