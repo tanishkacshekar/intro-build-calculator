@@ -32,3 +32,46 @@ The agent answers natural-language math word problems by calling tools:
   and prints `Check: PASS` twice.
 - **ChatGPT MCP tunnel:** unavailable (HTTP 401) — documented honestly in the
   notebook.
+
+## Saved Output Record (quoted verbatim from the executed notebook)
+
+**Fresh agent test (execution count 16):**
+
+```
+Tool requested: add {'a': 7, 'b': 8}
+Tool returned: add 15
+Tool requests: 1
+Final answer: They have a total of **15 apples**.
+```
+
+**LangSmith runs query (execution count 15):**
+
+```
+LangSmith runs found: 20
+Run: ChatGroq | Type: llm | Status: success | Error: None
+Run: model | Type: chain | Status: success | Error: None
+Run: intro_missing_angle | Type: chain | Status: success | Error: None
+Run: ChatGroq | Type: llm | Status: success | Error: None
+Run: model | Type: chain | Status: success | Error: None
+Run: tree_distance | Type: tool | Status: success | Error: None
+Run: tools | Type: chain | Status: success | Error: None
+Run: ChatGroq | Type: llm | Status: success | Error: None
+Run: model | Type: chain | Status: success | Error: None
+Run: intro_tree | Type: chain | Status: success | Error: None
+...
+```
+
+**MCP client verification (execution count 19):**
+
+```
+MCP server tools: ['solve_math_problem']
+Problem: One person brings five apples and another brings ten. ...
+MCP result: The total is 15 apples.
+Check: PASS
+----------------------------------------
+Problem: One person brings seven apples and another brings eight. ...
+MCP result: The total is 15 apples.
+Check: PASS
+----------------------------------------
+MCP verification thread finished.
+```
